@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import './App.css';
+import Operators from "./components/operators";
+import LeftPanel from "./components/leftPanel";
 
 function App() {
 
   let [display, setDisplay] = useState('0');
-
 
   const operation = () => {
     let operand1 = [];
@@ -71,12 +72,10 @@ function App() {
     console.log(operand2);
 
   }
-
   const tapeValue = (value) => {
     if(display === '0') {setDisplay(display = '')}
     setDisplay(display + value);
   }
-
   const onDeleteValue = () => {
     if(display.length === 1) {
       setDisplay('0');
@@ -85,38 +84,15 @@ function App() {
     }
   }
 
-
   return (
       <div className="calculator">
         <div className="input">{display}</div>
         <div className="buttons">
           <div className="operators">
-            <div onClick={() => tapeValue('+')}>+</div>
-            <div onClick={() => tapeValue('-')}>-</div>
-            <div onClick={() => tapeValue('*')}>*</div>
-            <div onClick={() => tapeValue('/')}>/</div>
+            <Operators tapeValue={tapeValue}/>
           </div>
           <div className="leftPanel">
-            <div className="numbers">
-              <div onClick={() => {tapeValue('7')}}>7</div>
-              <div onClick={() => {tapeValue('8')}}>8</div>
-              <div onClick={() => {tapeValue('9')}}>9</div>
-            </div>
-            <div className="numbers">
-              <div onClick={() => {tapeValue('4')}}>4</div>
-              <div onClick={() => {tapeValue('5')}}>5</div>
-              <div onClick={() => {tapeValue('6')}}>6</div>
-            </div>
-            <div className="numbers">
-              <div onClick={() => {tapeValue('1')}}>1</div>
-              <div onClick={() => {tapeValue('2')}}>2</div>
-              <div onClick={() => {tapeValue('3')}}>3</div>
-            </div>
-            <div className="numbers">
-              <div onClick={() => {tapeValue('0')}}>0</div>
-              <div onClick={() => tapeValue('.')}>.</div>
-              <div onClick={() => {onDeleteValue()}}>AC</div>
-            </div>
+            <LeftPanel onDeleteValue={onDeleteValue} tapeValue={tapeValue}/>
           </div>
           <div className="equal" onClick={() => {operation()}}>=</div>
         </div>
