@@ -12,21 +12,53 @@ function App() {
         let operator = "";
         let index = 0;
 
-        for (let i = 0; i < display.length; i++) {
-            if (display[i] === "+") {
-                operator = "+";
+        if(display[0] === "-") {
+            for (let i = 1; i < display.length; i++) {
+                if (display[i] === "+") {
+                    operator = "+";
+                    index = i;
+                    break;
+                }
+                if (display[i] === "-") {
+                    operator = "-";
+                    index = i;
+                    break;
+                }
+                if (display[i] === "*") {
+                    operator = "*";
+                    index = i;
+                    break;
+                }
+                if (display[i] === "/") {
+                    operator = "/";
+                    index = i;
+                    break;
+                }
             }
-            if (display[i] === "-") {
-                operator = "-";
-            }
-            if (display[i] === "*") {
-                operator = "*";
-            }
-            if (display[i] === "/") {
-                operator = "/";
+        } else {
+            for (let i = 0; i < display.length; i++) {
+                if (display[i] === "+") {
+                    operator = "+";
+                    index = i;
+                    break;
+                }
+                if (display[i] === "-") {
+                    operator = "-";
+                    index = i;
+                    break;
+                }
+                if (display[i] === "*") {
+                    operator = "*";
+                    index = i;
+                    break;
+                }
+                if (display[i] === "/") {
+                    operator = "/";
+                    index = i;
+                    break;
+                }
             }
         }
-        index = display.indexOf(operator);
 
         operand1 = display.slice(0, index);
         operand2 = display.slice(index + 1, display.length);
@@ -35,7 +67,7 @@ function App() {
             let result = Number(operand1) + Number(operand2);
             if (!isNaN(result)) {
                 setDisplay(String(result));
-            } else {
+            }  else {
                 setDisplay("error");
             }
         }
@@ -62,7 +94,7 @@ function App() {
             let result = Number(operand1) * Number(operand2);
             if (!isNaN(result)) {
                 setDisplay(String(result));
-            } else {
+            }  else {
                 setDisplay("error");
             }
         }
@@ -74,11 +106,7 @@ function App() {
         setDisplay(display + value);
     };
     const onDeleteValue = () => {
-        if (display.length === 1) {
-            setDisplay("0");
-        } else {
-            setDisplay(display.substring(0, display.length - 1));
-        }
+        setDisplay("0");
     };
 
     return (
